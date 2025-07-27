@@ -25,7 +25,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/check-in', [AttendanceController::class, 'checkIn']);
+    Route::post('/check-in', [AttendanceController::class, 'checkIn']);                                             
     Route::post('/check-out', [AttendanceController::class, 'checkOut']);
 });
 Route::middleware('auth:sanctum')->group(function () {

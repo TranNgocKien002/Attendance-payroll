@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\AttendanceWebController;
 use App\Http\Controllers\Admin\PayrollAdminController;
 
 /*
@@ -28,6 +29,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/attendance', [AttendanceWebController::class, 'index'])->name('attendance.index');
+    Route::post('/attendance/check-in', [AttendanceWebController::class, 'checkIn'])->name('attendance.checkin');
+    Route::post('/attendance/check-out', [AttendanceWebController::class, 'checkOut'])->name('attendance.checkout');
+});
+
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/payrolls', [PayrollAdminController::class, 'index'])->name('payroll.index');
 });
